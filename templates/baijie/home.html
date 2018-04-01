@@ -1,0 +1,26 @@
+{% extends 'basebaijie.html' %}
+{% block main %}
+{% for baijie in baijies %}
+<article class="blog blog-{{ baijie.id }}">
+    <header class="entry-header">
+        <h1 class="entry-title">
+            <a href="{% url 'baijie:blog_detail' baijie.id %}">{{ baijie.title }}</a>
+        </h1>
+        <div class="entry-meta">
+            <span class="post-date"><a href="javascript:void(0);"><time>{{ baijie.publish }}</time></a></span>
+            <span class="views-count"><a href="javascript:void(0);">{{ baijie.views }} 阅读</a></span>
+        </div>
+    </header>
+    <div class="entry-content clearfix">
+        <p>{{ baijie.excerpt }}...</p>
+        <div class="read-more cl-effect-14">
+            <a href="{% url 'baijie:blog_detail' baijie.id %}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
+        </div>
+    </div>
+</article>
+{% empty %}
+<div class="no-post">暂时还没有发布的文章！</div>
+{% endfor %}
+<br>
+{% include 'paginator.html' %}
+{% endblock main %}

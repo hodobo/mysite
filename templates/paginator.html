@@ -1,0 +1,54 @@
+<!-- ListView 传递了以下和分页有关的模板变量供我们在模板中使用：
+    1.paginator ，即 Paginator 的实例。
+    2.page_obj ，当前请求页面分页对象。
+    3.is_paginated，是否已分页。只有当分页后页面超过两页时才算已分页。
+    4.object_list，请求页面的对象列表，和 post_list 等价。所以在模板中循环文章列表时可以选 post_list ，也可以选 object_list。
+-->
+
+{% if is_paginated %}
+<div class="center">
+    <span class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+        {% endif %}
+    </span>
+    <span class="current">
+        第 {{ page_obj.number }} 页 / 共 {{ paginator.num_pages }} 页
+    </span>
+    <span class="pagination">
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+        {% endif %}
+    </span>
+    <span class="pagination">
+    <form action="" method="get">
+        <td>&nbsp;到第</td>
+        <td><input style="background-color:transparent; border-width:1;" name="page" type="text" size="2"></td>
+        <td>页</td>
+        <td><input style="background-color:transparent; border-width:1;" type="submit" value="跳转"></td>
+    </form>
+    </span>
+</div>
+{% endif %}
+
+<!--
+{% if is_paginated %}
+<table class="noframe">
+<tr>
+{% if page_obj.has_previous %}
+<td><a href="?page={{page_obj.previous_page_number}}">上一页</a></td>
+{% endif %}
+{% if page_obj.has_next %}
+<td><a href="?page={{page_obj.next_page_number}}">下一页</a></td>
+{% endif %}
+<td>第{{page_obj.number}}页，共{{paginator.num_pages}}页</td>
+<form action="" method="get">
+<td>&nbsp;到第</td>
+<td><input name="page" type="text" size="2"></td>
+<td>页</td>
+<td><input type="submit" value="跳转"></td>
+</form>
+</tr>
+</table>
+{% endif %}
+-->

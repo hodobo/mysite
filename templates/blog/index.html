@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+    {% block main %}
+        {% for blog in blogs %}
+        <article class="blog blog-{{ blog.id }}">
+            <header class="entry-header">
+                <h1 class="entry-title">
+                    <!--这种写法使用了 django 自带的模板标签 url 标签，它会自动解析 blog:blog_detail 这个视图函数对应的 url，
+                       并且把 blog.pk（文章的主键）传递给 detail 视图函数 。-->
+                    <a href="{% url 'blog:blog_detail' blog.id %}">{{ blog.title }}</a>
+                </h1>
+                <div class="entry-meta">
+                    <span class="post-category"><a href="javascript:void(0);">{{ blog.category }}</a></span>
+                    <span class="post-date"><a href="javascript:void(0);"><time>{{ blog.publish }}</time></a></span>
+                    <span class="views-count"><a href="javascript:void(0);">{{ blog.views }} 阅读</a></span>
+                </div>
+            </header>
+            <div class="entry-content clearfix">
+                <p>{{ blog.excerpt }}...</p>
+                <div class="read-more cl-effect-14">
+                    <!-- P136 -->
+                    <a href="{% url 'blog:blog_detail' blog.id %}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
+                </div>
+            </div>
+        </article>
+        {% empty %}
+        <div class="no-post">暂时还没有发布的文章！</div>
+        {% endfor %}
+        <br>
+        {% include 'paginator.html' %}
+    {% endblock main %}

@@ -1,0 +1,19 @@
+{% extends 'basebaijie.html' %}
+
+{% block main %}
+    <article class="blog article-{{ article.id }}">
+        <header class="entry-header">
+            <h1 class="entry-title">
+                {{ article.title }}
+            </h1>
+            <div class="entry-meta">
+                <span class="post-category"><a href="#">{{ article.category }}</a></span>
+                <span class="post-date"><a href="#"><time class="entry-date">{{ article.publish }}</time></a></span>
+                <span class="views-count"><a href="#">{{ article.views }} 阅读</a></span>
+            </div>
+        </header>
+        <div class="entry-content clearfix">
+            {{ article.body|safe }}
+        </div>
+    </article>
+{% endblock main %}

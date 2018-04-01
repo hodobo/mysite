@@ -1,0 +1,20 @@
+{% extends 'basebaijie.html' %}
+{% block main %}
+    <div class="row text-center vertical-middle-sm">
+        <h1>请登录</h1>
+        <p style="color:#FF0066">视频页面暂未对游客用户开放，请先登录。</p>
+        <form class="form-horizontal" action="{% url 'baijie:login' %}" method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}" style="color:#FF0066">账号：</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}" style="color:#FF0066">密码：</label>
+               {{ form.password }}
+            </div>
+            <input class="btn btn-success btn-md" type="submit" value="登录">
+        </form>
+    </div>
+{% endblock %}
